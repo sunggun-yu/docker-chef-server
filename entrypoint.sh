@@ -4,8 +4,6 @@ set -x
 
 sysctl -w kernel.shmmax=17179869184
 
-ulimit -s unlimited
-
 # Start this so that chef-server-ctl sv-related commands can interact with its services via runsv
 /opt/opscode/embedded/bin/runsvdir-start &
 
@@ -35,9 +33,6 @@ if [ ! -f /var/opt/chef-server/.configured ]; then
 
     # Touch flag file that is indicating initial chef server configuration has been done
     echo "configured" > /var/opt/chef-server/.configured
-else
-    # Run all of the services
-    chef-server-ctl reconfigure
 fi
 
 tail -f /var/log/opscode/*/current
