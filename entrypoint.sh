@@ -13,21 +13,6 @@ chef-server-ctl reconfigure
 ## Do initial installation and configuration
 if [ ! -f /var/opt/chef-server/.configured ]; then
 
-#    # Install Chef Manage
-#    chef-server-ctl install chef-manage
-#
-#    # Install Chef Reporting
-#    chef-server-ctl install opscode-reporting
-#
-#    # Reconfigure the Chef Server
-#    chef-server-ctl reconfigure
-#
-#    # Reconfigure Chef Manage
-#    chef-manage-ctl reconfigure --accept-license
-#
-#    # Reconfigure Chef Reporting
-#    opscode-reporting-ctl reconfigure
-
     # Create a default admin user
     chef-server-ctl user-create admin FIRST_NAME LAST_NAME admin@example.com 'admin123' --filename /var/opt/chef-server/admin.pem
 
@@ -35,6 +20,6 @@ if [ ! -f /var/opt/chef-server/.configured ]; then
     echo "configured" > /var/opt/chef-server/.configured
 fi
 
-tail -f /var/log/opscode/*/current
+tail -F /var/log/opscode/*/current
 
 exec "$@"
